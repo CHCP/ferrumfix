@@ -84,6 +84,7 @@
 //#![doc(html_root_url = "https://docs.rs/fefix/")]
 //#![warn(missing_docs, missing_doc_code_examples)]
 
+
 #![feature(unsafe_block_in_unsafe_fn)]
 #![deny(
     unused,
