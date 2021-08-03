@@ -1,13 +1,15 @@
 //! *FIX Adapted for Streaming*
 //! ([FAST](https://www.fixtrading.org/standards/fast/)) support.
 
-#![doc(html_root_url = "https://docs.rs/fefast/")]
-#![warn(missing_doc_code_examples)]
+//#![doc(html_root_url = "https://docs.rs/fefast/")]
+//#![warn(missing_doc_code_examples)]
+
+#![feature(unsafe_block_in_unsafe_fn)]
 #![deny(
     unused,
     missing_debug_implementations,
     unsafe_op_in_unsafe_fn,
-    rustdoc::broken_intra_doc_links,
+    //rustdoc::broken_intra_doc_links,
     //missing_docs,
     unconditional_recursion,
     unstable_name_collisions,
