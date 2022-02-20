@@ -175,13 +175,14 @@ impl FixConnection {
         mut input: I,
         mut output: O,
         decoder: Decoder,
+        password: String,
     ) where
         B: Backend,
         I: AsyncRead + Unpin,
         O: AsyncWrite + Unpin,
     {
         let mut decoder = decoder.buffered();
-        self.establish_connection(&mut app, &mut input, &mut output, &mut decoder)
+        self.establish_connection(&mut app, &mut input, &mut output, &mut decoder, &password)
             .await;
         self.event_loop(app, input, output, decoder).await;
     }
@@ -192,6 +193,7 @@ impl FixConnection {
         mut input: &mut I,
         output: &mut O,
         decoder: &mut DecoderBuffered,
+        password: &str,
     ) where
         A: Backend,
         I: AsyncRead + Unpin,
@@ -211,6 +213,7 @@ impl FixConnection {
             msg.set(fix44::MSG_SEQ_NUM, msg_seq_num);
             msg.set(fix44::ENCRYPT_METHOD, fix44::EncryptMethod::None);
             msg.set(fix44::HEART_BT_INT, self.heartbeat.as_secs());
+            msg.set(fix44::PASSWORD, password);
             msg.wrap()
         };
         output.write(logon).await.unwrap();
